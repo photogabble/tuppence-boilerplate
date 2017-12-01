@@ -27,12 +27,12 @@ class Database extends AbstractServiceProvider implements BootableServiceProvide
      */
     public function register()
     {
-        $this->getContainer()->add(Connection::class, function () {
+        $this->getContainer()->share(Connection::class, function () {
             $configuration = $this->getContainer()->get('config');
             return DriverManager::getConnection($configuration['database'], new \Doctrine\DBAL\Configuration());
         });
 
-        $this->getContainer()->add(EntityManagerInterface::class, function () {
+        $this->getContainer()->share(EntityManagerInterface::class, function () {
             $configuration = $this->getContainer()->get('config');
 
             return EntityManager::create(
