@@ -2,8 +2,8 @@
 <p align="center"><em>An Incredibly small PSR-7 "framework"</em></p>
 
 <p align="center">
-  <a href="https://packagist.org/packages/photogabble/tuppence-boilerplate"><img src="https://poser.pugx.org/photogabble/tuppence-boilerplate/v/stable.svg" alt="Latest Stable Version"></a>
-  <a href="LICENSE"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+  <a href="https://packagist.org/packages/photogabble/tuppence-boilerplate"><img src="https://img.shields.io/packagist/v/photogabble/tuppence-boilerplate.svg" alt="Latest Stable Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/photogabble/tuppence-boilerplate.svg" alt="License"></a>
 </p>
 
 ## About this boilerplate
