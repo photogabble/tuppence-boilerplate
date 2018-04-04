@@ -12,7 +12,9 @@ This boilerplate wraps [Tuppence](https://github.com/photogabble/tuppence) with 
 
 ## Install
 
-Install this project with composer `composer create-project photogabble/tuppence-boilerplate`
+Install this project with composer `composer create-project photogabble/tuppence-boilerplate`.
+
+For development you can use `php -S 127.0.0.1:3000 -t public` to serve your project locally on [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 ## PSR-7 Support
 

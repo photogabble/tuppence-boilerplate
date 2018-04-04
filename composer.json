@@ -12,7 +12,7 @@
         "php": ">=5.6.0",
         "doctrine/dbal": "^2.5",
         "doctrine/orm": "^2.5",
-        "photogabble/tuppence": "^1.0",
+        "photogabble/tuppence": "^1.1",
         "league/plates": "^3.3"
     },
     "require-dev": {
