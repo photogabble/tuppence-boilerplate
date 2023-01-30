@@ -39,6 +39,8 @@ class Controller
      */
     protected function view(string $template, array $values = [], int $status = 200, array$headers = []): Response
     {
-        return new Response($this->plates->render($template, $values), $status, $headers);
+        $response = new Response('php://memory', $status, $headers);
+        $response->getBody()->write($this->plates->render($template, $values));
+        return $response;
     }
 }
