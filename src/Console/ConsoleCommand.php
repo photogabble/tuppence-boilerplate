@@ -2,34 +2,25 @@
 
 namespace App\Console;
 
-use League\Container\ContainerInterface;
+use League\Container\DefinitionContainerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class ConsoleCommand extends Command
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected DefinitionContainerInterface $container;
 
-    /**
-     * @var InputInterface
-     */
-    protected $input;
+    protected InputInterface $input;
 
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
+    protected OutputInterface $output;
 
-    public function setContainer(ContainerInterface $container)
+    public function setContainer(DefinitionContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->input = $input;
         $this->output = $output;
@@ -39,5 +30,5 @@ abstract class ConsoleCommand extends Command
     /**
      * @return int
      */
-    abstract protected function fire();
+    abstract protected function fire(): int;
 }
