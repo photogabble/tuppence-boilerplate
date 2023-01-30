@@ -14,7 +14,7 @@ This boilerplate wraps [Tuppence](https://github.com/photogabble/tuppence) with 
 
 Install this project with composer `composer create-project photogabble/tuppence-boilerplate`.
 
-For development you can use `php -S 127.0.0.1:3000 -t public` to serve your project locally on [http://127.0.0.1:3000](http://127.0.0.1:3000).
+For development, you can use `php -S 127.0.0.1:3000 -t public` to serve your project locally on [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 ## PSR-7 Support
 
@@ -27,4 +27,4 @@ Middleware for initiating and managing Sessions.
 Middleware that determines the clients IP address and stores it as a `ServerRequest` attribute.
 
 #### [php-middleware/php-debug-bar](https://github.com/php-middleware/phpdebugbar)
-Framework agnostic middleware for attaching [PHP Debug Bar](http://phpdebugbar.com/) to your response.
+Framework-agnostic middleware for attaching [PHP Debug Bar](http://phpdebugbar.com/) to your response.
