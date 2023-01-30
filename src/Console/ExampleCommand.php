@@ -13,7 +13,7 @@ class ExampleCommand extends ConsoleCommand
     /**
      * @return int
      */
-    protected function fire()
+    protected function fire(): int
     {
         $this->output->writeln('Hello world.');
         return 0;
