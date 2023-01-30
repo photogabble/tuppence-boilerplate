@@ -35,7 +35,7 @@ class Console extends AbstractServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->getContainer()->add(Application::class, function(){
             $application = new Application($this->name, $this->version);
@@ -44,13 +44,17 @@ class Console extends AbstractServiceProvider
                 new ExampleCommand()
             ];
 
-            /** @var ConsoleCommand $command */
             foreach ($defaultCommands as $command)
             {
-                $command->setContainer($this->getContainer());
+                $command->setContainer($this->container);
                 $application->add($command);
             }
             return $application;
         });
+    }
+
+    public function provides(string $id): bool
+    {
+        return in_array($id, $this->provides);
     }
 }

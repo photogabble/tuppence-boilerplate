@@ -8,23 +8,21 @@ use Photogabble\Tuppence\App;
 use Photogabble\Tuppence\ErrorHandlers\DefaultExceptionHandler;
 use League\Route\Http\Exception\NotFoundException as RouteNotFoundException;
 use League\Container\Exception\NotFoundException as ContainerNotFoundException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\RequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Message\ResponseInterface;
 
 class Handler extends DefaultExceptionHandler
 {
     /**
      * Exceptions this handler should ignore and pass through.
-     *
-     * @var array
      */
-    protected $ignore = [];
+    protected array $ignore = [];
 
-    /**
-     * @var App
-     */
-    private $app;
+    private App $app;
 
     /**
      * Handler constructor.
@@ -38,10 +36,12 @@ class Handler extends DefaultExceptionHandler
     /**
      * @param Exception|RouteNotFoundException|ContainerNotFoundException $e
      * @param RequestInterface $request
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws Exception
+     * @return ResponseInterface
+     * @throws RouteNotFoundException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function __invoke(Exception $e, RequestInterface $request)
+    public function __invoke(Exception|RouteNotFoundException|ContainerNotFoundException $e, RequestInterface $request): ResponseInterface
     {
         if (in_array(get_class($e), $this->ignore)) {
             throw $e;
@@ -53,7 +53,7 @@ class Handler extends DefaultExceptionHandler
         if (file_exists($viewFilePath)){
             /** @var Engine $plates */
             $plates = $this->app->getContainer()->get(Engine::class);
-            return new HtmlResponse($plates->render('errors/' .$status, ['e' => $e]), $status);
+            return new Response($plates->render('errors/' .$status, ['e' => $e]), $status);
         }
 
         return new JsonResponse([

@@ -5,24 +5,15 @@ namespace App\Http\Controllers;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Plates\Engine;
 use Photogabble\Tuppence\App;
-use Zend\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response;
 
 class Controller
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
+    protected EntityManagerInterface $entityManager;
 
-    /**
-     * @var App
-     */
-    protected $app;
+    protected App $app;
 
-    /**
-     * @var Engine
-     */
-    protected $plates;
+    protected Engine $plates;
 
     /**
      * ContentType constructor.
@@ -44,10 +35,10 @@ class Controller
      * @param int $status
      * @param array $headers
      *
-     * @return HtmlResponse
+     * @return Response
      */
-    protected function view($template, $values = [], $status = 200, $headers = [])
+    protected function view(string $template, array $values = [], int $status = 200, array$headers = []): Response
     {
-        return new HtmlResponse($this->plates->render($template, $values), $status, $headers);
+        return new Response($this->plates->render($template, $values), $status, $headers);
     }
 }

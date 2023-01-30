@@ -12,8 +12,7 @@ use League\Container\ServiceProvider\BootableServiceProviderInterface;
 
 class Database extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
-    /** @var array */
-    protected $provides = [
+    protected array $provides = [
         EntityManagerInterface::class,
         Connection::class
     ];
@@ -25,14 +24,15 @@ class Database extends AbstractServiceProvider implements BootableServiceProvide
      *
      * @return void
      */
-    public function register()
+    public function register():void
     {
-        $this->getContainer()->share(Connection::class, function () {
+
+        $this->container->addShared(Connection::class, function () {
             $configuration = $this->getContainer()->get('config');
             return DriverManager::getConnection($configuration['database'], new \Doctrine\DBAL\Configuration());
         });
 
-        $this->getContainer()->share(EntityManagerInterface::class, function () {
+        $this->container->addShared(EntityManagerInterface::class, function () {
             $configuration = $this->getContainer()->get('config');
 
             return EntityManager::create(
@@ -56,8 +56,13 @@ class Database extends AbstractServiceProvider implements BootableServiceProvide
      *
      * @return void
      */
-    public function boot()
+    public function boot():void
     {
         // ...
+    }
+
+    public function provides(string $id): bool
+    {
+        return in_array($id, $this->provides);
     }
 }
