@@ -4,8 +4,9 @@ namespace App\Tests;
 
 use Photogabble\Tuppence\App;
 use Zend\Diactoros\ServerRequest;
+use PHPUnit\Framework\TestCase;
 
-class BootsApp extends \PHPUnit_Framework_TestCase
+class BootsApp extends TestCase
 {
     /** @var App */
     protected $app;
@@ -13,7 +14,7 @@ class BootsApp extends \PHPUnit_Framework_TestCase
     /** @var TestEmitter */
     protected $emitter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bootApp();
     }
