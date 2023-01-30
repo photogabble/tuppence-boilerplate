@@ -5,8 +5,9 @@ namespace App\Tests\Unit;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
+use PHPUnit\Framework\TestCase;
 
-class DatabaseTest extends \PHPUnit_Framework_TestCase
+class DatabaseTest extends TestCase
 {
 
     /**
@@ -19,7 +20,7 @@ class DatabaseTest extends \PHPUnit_Framework_TestCase
      *
      * @inheritdoc
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $configuration = include __DIR__ . '/../../config.php';
 
