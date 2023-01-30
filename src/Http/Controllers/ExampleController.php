@@ -9,11 +9,10 @@ class ExampleController extends Controller
 {
     /**
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @param array $args
-     * @return \Zend\Diactoros\Response\HtmlResponse
+     * @return ResponseInterface
      */
-    public function index(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    public function index(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
         return $this->view('home');
     }

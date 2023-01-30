@@ -1,29 +1,38 @@
 <?php
 
+use App\Exceptions\Handler;
+use App\Services\Console;
+use App\Services\Database;
+use App\Services\Plates;
+use App\Services\Routes;
+use Photogabble\Tuppence\App;
+use Photogabble\Tuppence\ErrorHandlers\InvalidHandlerException;
+
 define('APP_ROOT', realpath(__DIR__ . '/../'));
 
 include APP_ROOT . '/vendor/autoload.php';
 
-$app = new \Photogabble\Tuppence\App();
+$app = new App();
 try {
-    $app->setExceptionHandler(new \App\Exceptions\Handler($app));
-} catch (\Photogabble\Tuppence\ErrorHandlers\InvalidHandlerException $e) {
-    echo $e->getMessage(); die();
+    $app->setExceptionHandler(new Handler($app));
+} catch (InvalidHandlerException $e) {
+    echo $e->getMessage();
+    die();
 }
 
 //
 // Config
 //
 
-$app->getContainer()->share('config', include __DIR__ . '/../config.php');
+$app->getContainer()->addShared('config', include __DIR__ . '/../config.php');
 
 //
 // Services
 //
 
-$app->register(new \App\Services\Routes());
-$app->register(new \App\Services\Database());
-$app->register(new \App\Services\Plates());
-$app->register(new \App\Services\Console());
+$app->register(new Routes());
+$app->register(new Database());
+$app->register(new Plates());
+$app->register(new Console());
 
 return $app;

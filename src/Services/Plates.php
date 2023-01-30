@@ -8,8 +8,7 @@ use League\Container\ServiceProvider\BootableServiceProviderInterface;
 
 class Plates extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
-    /** @var array */
-    protected $provides = [
+    protected array $provides = [
         Engine::class
     ];
 
@@ -20,9 +19,9 @@ class Plates extends AbstractServiceProvider implements BootableServiceProviderI
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->container->share(Engine::class, function(){
+        $this->container->addShared(Engine::class, function(){
             return new Engine(APP_ROOT . '/resources/views', 'phtml');
         });
     }
@@ -36,8 +35,13 @@ class Plates extends AbstractServiceProvider implements BootableServiceProviderI
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // ...
+    }
+
+    public function provides(string $id): bool
+    {
+        return in_array($id, $this->provides);
     }
 }
