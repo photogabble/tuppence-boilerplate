@@ -5,7 +5,7 @@ namespace App\Tests\Feature;
 use App\Tests\BootsApp;
 use Laminas\Diactoros\ServerRequestFactory;
 
-class RoutesTest extends BootsApp
+final class RoutesTest extends BootsApp
 {
     public function testRoute()
     {
