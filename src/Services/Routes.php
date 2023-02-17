@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\ExampleController;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
 use Photogabble\Tuppence\App;
@@ -34,9 +35,9 @@ class Routes extends AbstractServiceProvider implements BootableServiceProviderI
     public function boot(): void
     {
         /** @var App $app */
-        $app = $this->getContainer()->get(App::class);
+        $app = $this->container->get(App::class);
 
-        $app->get('/', '\App\Http\Controllers\ExampleController::index');
+        $app->get('/', [ExampleController::class, 'index']);
     }
 
     public function provides(string $id): bool
