@@ -1,21 +1,22 @@
 <?php
 
+use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
+use Photogabble\Tuppence\App;
 use App\Exceptions\Handler;
-use App\Services\Console;
 use App\Services\Database;
+use App\Services\Console;
 use App\Services\Plates;
 use App\Services\Routes;
-use Photogabble\Tuppence\App;
-use Photogabble\Tuppence\ErrorHandlers\InvalidHandlerException;
 
-define('APP_ROOT', realpath(__DIR__ . '/../'));
+if (!defined('APP_ROOT')) define('APP_ROOT', realpath(__DIR__ . '/../'));
 
 include APP_ROOT . '/vendor/autoload.php';
 
-$app = new App();
+/** @var EmitterInterface|null $emitter set if in UnitTesting */
+$app = new App($emitter ?? null);
 try {
     $app->setExceptionHandler(new Handler($app));
-} catch (InvalidHandlerException $e) {
+} catch (Throwable $e) {
     echo $e->getMessage();
     die();
 }

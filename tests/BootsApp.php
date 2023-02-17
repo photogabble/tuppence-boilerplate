@@ -6,7 +6,7 @@ use Photogabble\Tuppence\App;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
-class BootsApp extends TestCase
+abstract class BootsApp extends TestCase
 {
     protected App $app;
 
@@ -19,7 +19,7 @@ class BootsApp extends TestCase
 
     protected function bootApp()
     {
-        $this->emitter = new TestEmitter();
+        $this->emitter = $emitter = new TestEmitter();
         $this->app = include __DIR__ .'/../src/bootstrap.php';
     }
 
