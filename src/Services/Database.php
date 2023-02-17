@@ -8,7 +8,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\ORMSetup;
