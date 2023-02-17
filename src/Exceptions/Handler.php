@@ -53,7 +53,10 @@ class Handler extends DefaultExceptionHandler
         if (file_exists($viewFilePath)){
             /** @var Engine $plates */
             $plates = $this->app->getContainer()->get(Engine::class);
-            return new Response($plates->render('errors/' .$status, ['e' => $e]), $status);
+
+            $response = new Response('php://memory', $status);
+            $response->getBody()->write($plates->render('errors/' .$status, ['e' => $e]));
+            return $response;
         }
 
         return new JsonResponse([
