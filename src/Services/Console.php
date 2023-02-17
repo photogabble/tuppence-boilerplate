@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Console\ConsoleCommand;
 use App\Console\ExampleCommand;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Symfony\Component\Console\Application;
